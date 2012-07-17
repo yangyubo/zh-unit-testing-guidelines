@@ -9,14 +9,14 @@ version = u''
 release = u''
 
 source_suffix = '.rst'
-master_doc = 'contents'
-language = 'zh_CN'
+master_doc = 'index'
+language = 'en_US'
 exclude_patterns = ['_build']
 extensions = ['sphinx.ext.pngmath']
 pygments_style = 'sphinx'
 
 html_title = u'单元测试准则'
-html_theme = 'yeetheme'
+html_theme = 'haiku'
 html_theme_path = ['../../../templates/sphinx', ]
 htmlhelp_basename = 'unit-testing-guidelines'
 html_add_permalinks = None
@@ -26,6 +26,8 @@ latex_documents = [
   ('index', 'unit-testing-guidelines.tex', u'单元测试准则',
    u'', 'manual'),
 ]
+
+exclude_patterns = ['README.rst']
 
 
 #Add sponsorship and project information to the template context.
@@ -37,4 +39,3 @@ context = {
 }
 
 html_context = context
-

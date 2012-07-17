@@ -7,16 +7,14 @@
 
 :翻译日期: 2009 年 6 月
 
-译者 (yospaly) 前言:
+译者 ( `brantyoung <http://yangyubo.com>`_ ) 前言:
   .. line-block::
 
     实施单元测试的时候, 如果没有一份经过实践证明的详细规范, 很难掌握测试的 "度", 范围太小施展不开, 太大又侵犯 "别人的" 地盘. 上帝的归上帝, 凯撒的归凯撒, 给单元测试念念紧箍咒不见得是件坏事, 反而更有利于发挥单元测试的威力, 为代码重构和提高代码质量提供动力.
-    
-    这份文档来自 Geotechnical, 是一份非常难得的经验准则. 你完全可以以这份准则作为模板, 结合所在团队的经验, 整理出一份内部单元测试准则.
-    
-    译文由强大的 reStructuredText_ 文本标记语法驱动.
 
-.. note:: 发表评论请前往: http://blog.yangyubo.com/unit-testing-guidelines
+    这份文档来自 Geotechnical, 是一份非常难得的经验准则. 你完全可以以这份准则作为模板, 结合所在团队的经验, 整理出一份内部单元测试准则.
+
+    译文由强大的 reStructuredText_ 文本标记语法驱动.
 
 .. contents:: 测试准则
    :backlinks: none
@@ -60,7 +58,7 @@
 下面便是单元测试版的 *Hello, world!* :
 
 ::
-    
+
     void testDefaultConstruction()
     {
     Foo foo = new Foo();
@@ -110,9 +108,9 @@ Make sure the build environment is configured so that the test classes doesn't m
 - *芝麻* 很难定义. 对于不同的人有不同的理解.
 - 从黑盒测试的观点看, 是无法知道哪些代码是普通的.
 - 即便是再芝麻的函数, 也可能包含错误, 通常是 "复制粘贴" 代码的后果:
-  
+
   ::
-    
+
      private double weight_;
      private double x_, y_;
 
@@ -141,9 +139,9 @@ Make sure the build environment is configured so that the test classes doesn't m
 思考以下公有方法:
 
 ::
-  
+
   void setLength(double length);
-  
+
 调用 ``setLength(1.0)`` 你可能会得到 100% 的执行覆盖率. 要达到 100% 的实际测试覆盖率, 有多少个 ``double`` 浮点数这个方法就必须被调用多少次, 并且要一一验证行为的正确性. 这无疑是不可能的任务.
 
 16. 覆盖边界值
@@ -161,7 +159,7 @@ Make sure the build environment is configured so that the test classes doesn't m
 如果测试时间比较短, 可以考虑再裹上一层循环, 覆盖尽可能多的输入组合. 下面的例子是验证两次转换 little endian 和 big endian 字节序后是否返回原值. 由于测试过程很快, 可以让它跑上个一百万次.
 
 ::
-    
+
     void testByteSwapper()
     {
       for (int i = 0; i < 1000000; i++) {
@@ -192,13 +190,13 @@ Make sure the build environment is configured so that the test classes doesn't m
 假设如下方法的参数如果传进去的是负数, 会立马抛出异常:
 
 ::
-  
+
   void setLength(double length) throws IllegalArgumentExcepti
 
 可以用下面的方法来测试这个特例是否被正确处理:
 
 ::
-  
+
     try {
       setLength(-1.0);
       fail();  // If we get here, something went wrong
@@ -216,20 +214,20 @@ Make sure the build environment is configured so that the test classes doesn't m
 一些建议:
 
  - 使类成员常量化, 在构造函数中进行初始化. 减少 ``setter`` 方法的数量.
- 
+
  - 限制过度使用继承和公有虚函数.
- 
+
  - 通过使用友元类 (C++) 或包作用域 (Java) 来减少公有接口.
- 
+
  - 避免不必要的逻辑分支.
- 
+
  - 在逻辑分支中编写尽可能少的代码.
- 
+
  - 在公有和私有接口中尽量多用异常和断言验证参数参数的有效性.
- 
+
  - 限制使用快捷函数. 对于黑箱而言, 所有方法都必须一视同仁的进行测试. 考虑以下简短的例子:
    ::
-        
+
         public void scale(double x0, double y0, double scaleFactor)
         {
           // scaling logic
@@ -239,7 +237,7 @@ Make sure the build environment is configured so that the test classes doesn't m
         {
           scale(x0, y0, 1.0);
         }
-   
+
    删除后者可以简化测试, 但用户代码的工作量也将略微增加.
 
 
@@ -270,7 +268,7 @@ Make sure the build environment is configured so that the test classes doesn't m
 考虑下面的这个例子:
 
 ::
-    
+
     Handle handle = manager.getHandle();
     assertNotNull(handle);
 
@@ -280,7 +278,7 @@ Make sure the build environment is configured so that the test classes doesn't m
 如果第一个断言失败, 紧接其后的语句会导致代码崩溃, 剩下的测试都将不被执行. 任何时候都要为测试失败做好准备, 避免单个失败的测试项中断整个测试套件的执行. 上面的例子可以重写成:
 
 ::
-    
+
     Handle handle = manager.getHandle();
     assertNotNull(handle);
     if (handle == null) return;
