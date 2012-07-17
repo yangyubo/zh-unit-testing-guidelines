@@ -10,6 +10,10 @@
 译者 ( `brantyoung <http://yangyubo.com>`_ ) 前言:
   .. line-block::
 
+:项目主页:
+    - `Geotechnical Unit Testing Guidelines <http://geosoft.no/development/unittesting.html>`_
+    - `Geotechnical 单元测试指南 - 中文版 <https://github.com/brantyoung/zh-unit-testing-guidelines>`_
+
     实施单元测试的时候, 如果没有一份经过实践证明的详细规范, 很难掌握测试的 "度", 范围太小施展不开, 太大又侵犯 "别人的" 地盘. 上帝的归上帝, 凯撒的归凯撒, 给单元测试念念紧箍咒不见得是件坏事, 反而更有利于发挥单元测试的威力, 为代码重构和提高代码质量提供动力.
 
     这份文档来自 Geotechnical, 是一份非常难得的经验准则. 你完全可以以这份准则作为模板, 结合所在团队的经验, 整理出一份内部单元测试准则.
